@@ -1,7 +1,9 @@
 use std::env;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    let mut args: Vec<String> = env::args().collect();
+    // remove the first element of the vector ($0)
+    args = args[1..].to_vec();
     let string_args: String = args.join(" ");
 
     println!("{}", meme_generator(string_args));
