@@ -1,5 +1,10 @@
+use std::env;
+
 fn main() {
-    println!("{}", meme_generator(String::from("meme")));
+    let args: Vec<String> = env::args().collect();
+    let string_args: String = args.join(" ");
+
+    println!("{}", meme_generator(string_args));
 }
 
 fn meme_generator(s: String) -> String {
