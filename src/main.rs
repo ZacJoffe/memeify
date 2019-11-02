@@ -1,6 +1,7 @@
 extern crate clap;
 
 use clap::{Arg, App};
+use std::fs;
 
 fn main() {
     let matches = App::new("Memeify")
@@ -20,10 +21,16 @@ fn main() {
             .takes_value(true),
         ).get_matches();
 
-    if let Some(s) = matches.value_of("string") {
-        let args: String = s.to_string();
+    if let Some(s) = matches.values_of("string") {
+        let args: String = s.collect();
         println!("{}", meme_generator(args))
     }
+
+    if let Some(f) = matches.value_of("file") {
+        let data = fs::read_to_string(f).expect("Unable to open file");
+        println!("{}", meme_generator(data));
+    }
+
 
     /*
     let mut args: Vec<String> = env::args().collect();
